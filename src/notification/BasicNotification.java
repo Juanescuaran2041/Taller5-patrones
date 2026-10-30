@@ -12,6 +12,6 @@ public class BasicNotification implements Notification {
 
     @Override
     public String send() {
-        return "New incident" + incident.getAlert().getDescription();
+        return "New incident: " + incident.getAlert().getDescription();
     }
 }

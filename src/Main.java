@@ -1,15 +1,27 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import facade.IncidentManagementFacade;
+import integration.LegacyAdapter;
+import integration.LegacyMonitor;
+import order.OrderAttention;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+public class Main {
+
+    public static void main(String[] args) {
+        LegacyAdapter alertSource = new LegacyAdapter(new LegacyMonitor());
+        IncidentManagementFacade facade = new IncidentManagementFacade();
+        IncidentManagementFacade.Result result = facade.processAlert(
+                alertSource,
+                "Ana Perez",
+                "Diurno"
+        );
+
+        OrderAttention order = result.getOrder();
+        System.out.println("Incidente: " + order.getIncident().getId());
+        System.out.println("Tipo: " + order.getIncident().getType());
+        System.out.println("Orden: " + order.getOrderId());
+        System.out.println("Ubicación: " + order.getLocation());
+        System.out.println("Técnico: " + order.getTecnician());
+        System.out.println("Notificación:\n" + result.getNotification());
     }
 }

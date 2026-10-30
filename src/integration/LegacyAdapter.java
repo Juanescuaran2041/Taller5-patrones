@@ -30,8 +30,8 @@ public class LegacyAdapter implements AlertSource {
         int affectedUsers = Integer.parseInt(fields[4]);
 
         return new AlertData(
-                location,
                 category,
+            location,
                 description,
                 severity,
                 affectedUsers

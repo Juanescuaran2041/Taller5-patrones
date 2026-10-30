@@ -18,6 +18,6 @@ public class PriorityDecorator extends NotificationDecorator {
 
         int priority = (severity * 2) + Math.min(users, 10);
 
-        return notification.send() + "Priority: " + priority;
+        return notification.send() + "\nPriority: " + priority;
     }
 }
